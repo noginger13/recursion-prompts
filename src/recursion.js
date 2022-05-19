@@ -156,18 +156,13 @@ var powerOfTwo = function(n) {
 var reverse = function(string) {
   if (typeof(string) === 'string') {
     var arrayOfString = string.split('');
-    var popped = [arrayOfString.pop()];
-    return reverse([popped, arrayOfString]);
+    return reverse(arrayOfString);
   } else {
-    var newWord = string[0].slice();
-    var oldWord = string[1].slice();
-    if (oldWord.length > 0){
-      var newPop = oldWord.pop();
-      newWord.push(newPop);
-      return reverse([newWord, oldWord]);
-    } else {
-      return newWord.join('');
+    var reverseString = '';
+    for (var i = string.length - 1; i >= 0; i--) {
+      reverseString += string[i];
     }
+    return reverseString;
   }
 };
 
@@ -176,24 +171,21 @@ var palindrome = function(string) {
   if (typeof(string) === 'string') {
     var lowerCase = string.toLowerCase();
     var arrayOfString = lowerCase.split('');
-    var popped = [arrayOfString.pop()];
-    return palindrome([popped, arrayOfString, lowerCase]);
+    return palindrome(arrayOfString);
   } else {
-    var newWord = string[0].slice();
-    var oldWord = string[1].slice();
-    if (oldWord.length > 0){
-      var newPop = oldWord.pop();
-      newWord.push(newPop);
-      return palindrome([newWord, oldWord, string[2]]);
-    } else {
-      return (newWord.join('') === string[2]);
+    var optimizeString = '';
+    var reverseString = '';
+    for (var i = 0; i < string.length; i++) {
+      if (string[i] !== ' ') {
+        optimizeString += string[i];
+      }
     }
-  }
-
-  if (lowerCase === reverse(lowerCase)) {
-    return true;
-  } else {
-    return false;
+    for (var j = string.length - 1; j >= 0; j--) {
+      if (string[j] !== ' ') {
+        reverseString += string[j];
+      }
+    }
+    return (optimizeString === reverseString);
   }
 };
 
